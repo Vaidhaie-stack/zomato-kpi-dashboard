@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zomato Supporting KPIs - Strategic Wireframe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            color: #2d3748;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #e53e3e, #fd9801);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            color: #718096;
+            font-size: 1.1em;
+        }
+        
+        .wireframe {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            grid-template-rows: auto auto auto;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .objective-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .objective-box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .objective-box h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+        
+        .kpi-cluster {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .kpi-card {
+            background: white;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 20px;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .kpi-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .kpi-card.discovery {
+            border-color: #38b2ac;
+            background: linear-gradient(135deg, rgba(56, 178, 172, 0.05), rgba(56, 178, 172, 0.1));
+        }
+        
+        .kpi-card.delivery {
+            border-color: #ed8936;
+            background: linear-gradient(135deg, rgba(237, 137, 54, 0.05), rgba(237, 137, 54, 0.1));
+        }
+        
+        .kpi-number {
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: #e53e3e;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        .kpi-title {
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+            padding-top: 10px;
+        }
+        
+        .kpi-metric {
+            color: #4a5568;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        
+        .kpi-target {
+            background: #e6fffa;
+            color: #00695c;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .kpi-impact {
+            color: #718096;
+            font-size: 0.85em;
+            line-height: 1.4;
+            font-style: italic;
+        }
+        
+        .connection-line {
+            stroke: #cbd5e0;
+            stroke-width: 2;
+            fill: none;
+            stroke-dasharray: 5,5;
+            opacity: 0.7;
+        }
+        
+        .user-journey {
+            background: linear-gradient(135deg, #f7fafc, #edf2f7);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .journey-title {
+            color: #2d3748;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .journey-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .journey-step {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .journey-step:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5em;
+            color: #a0aec0;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        .discovery-color { background: #38b2ac; }
+        .delivery-color { background: #ed8936; }
+        
+        @media (max-width: 1200px) {
+            .wireframe {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+            
+            .kpi-cluster {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .kpi-card {
+                max-width: 300px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .kpi-cluster {
+                flex-direction: column;
+            }
+            
+            .journey-step:not(:last-child)::after {
+                content: '↓';
+                right: 50%;
+                top: 100%;
+                transform: translateX(50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Zomato Supporting KPIs Framework</h1>
+            <p>Strategic wireframe showing KPI relationships to OKRs and user journey impact</p>
+        </div>
+        
+        <div class="wireframe">
+            <!-- Objective 1: Discovery Excellence -->
+            <div class="objective-box">
+                <h3>🎯 Objective 1</h3>
+                <p><strong>Discovery Excellence</strong></p>
+                <p>Hyper-personalized food discovery that reduces decision time</p>
+            </div>
+            
+            <!-- Discovery KPIs Cluster -->
+            <div class="kpi-cluster">
+                <div class="kpi-card discovery">
+                    <div class="kpi-number">1</div>
+                    <div class="kpi-title">Contextual Recommendation Accuracy Rate</div>
+                    <div class="kpi-metric">% of AI-suggested items added to cart in same session</div>
+                    <div class="kpi-target">🎯 45% accuracy rate</div>
+                    <div class="kpi-impact">Validates hyper-personalization effectiveness and user intent understanding</div>
+                </div>
+                
+                <div class="kpi-card discovery">
+                    <div class="kpi-number">3</div>
+                    <div class="kpi-title">Social Discovery Engagement Rate</div>
+                    <div class="kpi-metric">% engaging with friend recommendations & social feeds</div>
+                    <div class="kpi-target">🎯 35% weekly engagement</div>
+                    <div class="kpi-impact">Measures network effects and competitive moats through social discovery</div>
+                </div>
+                
+                <div class="kpi-card discovery">
+                    <div class="kpi-number">4</div>
+                    <div class="kpi-title">Micro-Moment Conversion Rate</div>
+                    <div class="kpi-metric">% of orders placed within 90 seconds of app open</div>
+                    <div class="kpi-target">🎯 25% of total orders</div>
+                    <div class="kpi-impact">Proves intent prediction success and frictionless ordering capability</div>
+                </div>
+                
+                <div class="kpi-card discovery">
+                    <div class="kpi-number">5</div>
+                    <div class="kpi-title">Cross-Session Context Retention</div>
+                    <div class="kpi-metric">% of users whose preferences persist across sessions</div>
+                    <div class="kpi-target">🎯 85% retention accuracy</div>
+                    <div class="kpi-impact">Indicates how "smart" Zomato feels to users - no re-teaching needed</div>
+                </div>
+                
+                <div class="kpi-card discovery">
+                    <div class="kpi-number">6</div>
+                    <div class="kpi-title">Discovery-to-Loyalty Conversion</div>
+                    <div class="kpi-metric">% becoming high-frequency orderers (8+ orders/month) within 30 days</div>
+                    <div class="kpi-target">🎯 18% conversion</div>
+                    <div class="kpi-impact">Tracks long-term behavior change and sustained loyalty formation</div>
+                </div>
+            </div>
+            
+            <!-- Objective 2: Delivery Excellence -->
+            <div class="objective-box">
+                <h3>🎯 Objective 2</h3>
+                <p><strong>Delivery Excellence</strong></p>
+                <p>Reliable, anxiety-free delivery experience that builds trust</p>
+            </div>
+            
+            <!-- Empty space for visual balance -->
+            <div></div>
+            
+            <!-- Delivery KPI -->
+            <div class="kpi-cluster">
+                <div class="kpi-card delivery">
+                    <div class="kpi-number">2</div>
+                    <div class="kpi-title">Delivery Anxiety Index</div>
+                    <div class="kpi-metric">Composite score: tracking refreshes, support chats, courier calls during delivery</div>
+                    <div class="kpi-target">🎯 60% reduction</div>
+                    <div class="kpi-impact">Captures emotional side of delivery - trust in ETAs and process builds loyalty</div>
+                </div>
+            </div>
+            
+            <!-- Empty space for visual balance -->
+            <div></div>
+        </div>
+        
+        <div class="user-journey">
+            <h3 class="journey-title">🚀 User Journey Impact Flow</h3>
+            <div class="journey-flow">
+                <div class="journey-step">
+                    <strong>App Open</strong><br>
+                    <small>Micro-Moment Conversion tracking begins</small>
+                </div>
+                <div class="journey-step">
+                    <strong>Discovery</strong><br>
+                    <small>Contextual recommendations + Social engagement</small>
+                </div>
+                <div class="journey-step">
+                    <strong>Decision</strong><br>
+                    <small>Cross-session context aids selection</small>
+                </div>
+                <div class="journey-step">
+                    <strong>Order</strong><br>
+                    <small>Conversion metrics captured</small>
+                </div>
+                <div class="journey-step">
+                    <strong>Delivery</strong><br>
+                    <small>Anxiety index monitoring</small>
+                </div>
+                <div class="journey-step">
+                    <strong>Loyalty</strong><br>
+                    <small>Discovery-to-loyalty conversion tracking</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color discovery-color"></div>
+                <span>Discovery Excellence KPIs</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color delivery-color"></div>
+                <span>Delivery Excellence KPIs</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
